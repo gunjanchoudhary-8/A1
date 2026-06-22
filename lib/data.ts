@@ -1,6 +1,7 @@
 import type {
   CategoryView,
   HeroSlideView,
+  ProductView,
   ProjectView,
   ServiceView,
   SiteSettings,
@@ -183,6 +184,213 @@ export const fallbackCategories: CategoryView[] = [
       src: "https://images.unsplash.com/photo-1545239351-1141bd82e8a6?q=80&w=1600&auto=format&fit=crop",
       alt: "Decorative tray with plants and candles styled on a table",
     },
+  },
+];
+
+export const fallbackProducts: ProductView[] = [
+  {
+    _id: "fallback-product-1",
+    name: "Fiddle Leaf Fig",
+    slug: "fiddle-leaf-fig",
+    category: { name: "Indoor Plants", slug: "indoor-plants" },
+    images: [
+      {
+        src: "https://images.unsplash.com/photo-1597055181300-e3633a917c0e?q=80&w=1600&auto=format&fit=crop",
+        alt: "Fiddle leaf fig in a woven basket planter",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1602923668104-8f9e03e77e62?q=80&w=1600&auto=format&fit=crop",
+        alt: "Close-up of fiddle leaf fig foliage",
+      },
+    ],
+    shortDescription:
+      "A sculptural statement plant with large, glossy violin-shaped leaves.",
+    description:
+      "The Fiddle Leaf Fig (Ficus lyrata) is a designer favourite, prized for its tall silhouette and dramatic foliage. It thrives in bright, indirect light and brings instant architectural impact to living rooms, lobbies and studios.",
+    specifications: [
+      { label: "Light", value: "Bright, indirect" },
+      { label: "Water", value: "Weekly, when topsoil is dry" },
+      { label: "Mature height", value: "1.5 – 2.5 m" },
+      { label: "Pet friendly", value: "No" },
+      { label: "Care level", value: "Moderate" },
+    ],
+    availabilityLabel: "In stock",
+    featured: true,
+  },
+  {
+    _id: "fallback-product-2",
+    name: "Snake Plant",
+    slug: "snake-plant",
+    category: { name: "Indoor Plants", slug: "indoor-plants" },
+    images: [
+      {
+        src: "https://images.unsplash.com/photo-1593482892290-f54927ae1bb6?q=80&w=1600&auto=format&fit=crop",
+        alt: "Snake plant with upright variegated leaves",
+      },
+    ],
+    shortDescription:
+      "Near-indestructible air-purifier that tolerates low light and neglect.",
+    description:
+      "The Snake Plant (Sansevieria) is one of the toughest, most forgiving houseplants you can own. Its upright, sword-like leaves filter indoor air and look striking in modern interiors — perfect for beginners and busy spaces.",
+    specifications: [
+      { label: "Light", value: "Low to bright, indirect" },
+      { label: "Water", value: "Every 2 – 3 weeks" },
+      { label: "Mature height", value: "0.6 – 1 m" },
+      { label: "Pet friendly", value: "No" },
+      { label: "Care level", value: "Easy" },
+    ],
+    availabilityLabel: "In stock",
+    featured: true,
+  },
+  {
+    _id: "fallback-product-3",
+    name: "Areca Palm",
+    slug: "areca-palm",
+    category: { name: "Outdoor Plants", slug: "outdoor-plants" },
+    images: [
+      {
+        src: "https://images.unsplash.com/photo-1545239351-cefa43af60f3?q=80&w=1600&auto=format&fit=crop",
+        alt: "Areca palm with arching green fronds",
+      },
+    ],
+    shortDescription:
+      "Lush, feathery palm that adds a tropical feel to balconies and patios.",
+    description:
+      "The Areca Palm is a fast-growing, clumping palm with graceful arching fronds. It loves bright spots and humidity, making it ideal for terraces, courtyards and shaded outdoor corners.",
+    specifications: [
+      { label: "Light", value: "Bright, filtered sun" },
+      { label: "Water", value: "Keep soil lightly moist" },
+      { label: "Mature height", value: "2 – 3 m" },
+      { label: "Pet friendly", value: "Yes" },
+      { label: "Care level", value: "Moderate" },
+    ],
+    availabilityLabel: "In stock",
+    featured: false,
+  },
+  {
+    _id: "fallback-product-4",
+    name: "Bougainvillea",
+    slug: "bougainvillea",
+    category: { name: "Flowering Plants", slug: "flowering-plants" },
+    images: [
+      {
+        src: "https://images.unsplash.com/photo-1592150621744-aca64f48394a?q=80&w=1600&auto=format&fit=crop",
+        alt: "Vibrant pink bougainvillea in bloom",
+      },
+    ],
+    shortDescription:
+      "Vigorous climber that explodes with colour through the warm months.",
+    description:
+      "Bougainvillea is a hardy, sun-loving climber famous for its papery bracts in shades of magenta, orange and white. Train it over walls, arches and fences for a cascade of seasonal colour.",
+    specifications: [
+      { label: "Light", value: "Full sun" },
+      { label: "Water", value: "Moderate; drought tolerant once established" },
+      { label: "Mature height", value: "Up to 6 m (climbing)" },
+      { label: "Bloom season", value: "Spring to autumn" },
+      { label: "Care level", value: "Easy" },
+    ],
+    availabilityLabel: "Seasonal",
+    featured: false,
+  },
+  {
+    _id: "fallback-product-5",
+    name: "Echeveria Succulent",
+    slug: "echeveria-succulent",
+    category: { name: "Succulents", slug: "succulents" },
+    images: [
+      {
+        src: "https://images.unsplash.com/photo-1459411552884-841db9b3cc2a?q=80&w=1600&auto=format&fit=crop",
+        alt: "Rosette-shaped echeveria succulent",
+      },
+    ],
+    shortDescription:
+      "Compact rosette succulent, perfect for desks, sills and gifting.",
+    description:
+      "Echeverias form tidy, symmetrical rosettes in soft greens, blues and pinks. They need very little water and look beautiful grouped in small pots or decorative trays.",
+    specifications: [
+      { label: "Light", value: "Bright, direct" },
+      { label: "Water", value: "Every 2 – 3 weeks" },
+      { label: "Mature size", value: "10 – 20 cm" },
+      { label: "Pet friendly", value: "Yes" },
+      { label: "Care level", value: "Easy" },
+    ],
+    availabilityLabel: "In stock",
+    featured: true,
+  },
+  {
+    _id: "fallback-product-6",
+    name: "Money Plant Gift Box",
+    slug: "money-plant-gift-box",
+    category: { name: "Corporate Gifts", slug: "corporate-gifts" },
+    images: [
+      {
+        src: "https://images.unsplash.com/photo-1602923668104-8f9e03e77e62?q=80&w=1600&auto=format&fit=crop",
+        alt: "Money plant styled in a premium gift box",
+      },
+    ],
+    shortDescription:
+      "Premium boxed money plant — a thoughtful, low-maintenance corporate gift.",
+    description:
+      "A curated gifting set pairing an easy-care money plant (Pothos) with a premium ceramic planter and branded packaging. A memorable, green alternative to conventional corporate gifts.",
+    specifications: [
+      { label: "Light", value: "Low to bright, indirect" },
+      { label: "Water", value: "Weekly" },
+      { label: "Includes", value: "Plant, ceramic planter, gift box" },
+      { label: "Customisation", value: "Branded sleeve available" },
+      { label: "Care level", value: "Easy" },
+    ],
+    availabilityLabel: "Made to order",
+    featured: false,
+  },
+  {
+    _id: "fallback-product-7",
+    name: "Succulent Trio Tray",
+    slug: "succulent-trio-tray",
+    category: { name: "Decorative Trays", slug: "decorative-trays" },
+    images: [
+      {
+        src: "https://images.unsplash.com/photo-1485955900006-10f4d324d411?q=80&w=1600&auto=format&fit=crop",
+        alt: "Decorative tray styled with three small succulents",
+      },
+    ],
+    shortDescription:
+      "Three hand-picked succulents styled in a handcrafted decorative tray.",
+    description:
+      "A ready-to-display arrangement of three complementary succulents set in a handcrafted tray. Designed to elevate reception desks, coffee tables and counters with minimal upkeep.",
+    specifications: [
+      { label: "Light", value: "Bright, indirect" },
+      { label: "Water", value: "Light misting fortnightly" },
+      { label: "Includes", value: "3 succulents, decorative tray" },
+      { label: "Tray finish", value: "Matte ceramic" },
+      { label: "Care level", value: "Easy" },
+    ],
+    availabilityLabel: "In stock",
+    featured: false,
+  },
+  {
+    _id: "fallback-product-8",
+    name: "Peace Lily",
+    slug: "peace-lily",
+    category: { name: "Indoor Plants", slug: "indoor-plants" },
+    images: [
+      {
+        src: "https://images.unsplash.com/photo-1593691509543-c55fb32d8de5?q=80&w=1600&auto=format&fit=crop",
+        alt: "Peace lily with white blooms and dark green leaves",
+      },
+    ],
+    shortDescription:
+      "Elegant air-purifier with glossy leaves and signature white blooms.",
+    description:
+      "The Peace Lily (Spathiphyllum) combines lush dark-green foliage with striking white spathes. It thrives in lower light, signals when it needs water by drooping, and is a top performer for cleaning indoor air.",
+    specifications: [
+      { label: "Light", value: "Low to medium, indirect" },
+      { label: "Water", value: "When leaves begin to droop" },
+      { label: "Mature height", value: "0.4 – 0.6 m" },
+      { label: "Pet friendly", value: "No" },
+      { label: "Care level", value: "Easy" },
+    ],
+    availabilityLabel: "In stock",
+    featured: false,
   },
 ];
 

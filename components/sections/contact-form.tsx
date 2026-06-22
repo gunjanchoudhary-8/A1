@@ -1,8 +1,10 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useEffect, useState, type FormEvent } from "react";
 import { motion } from "framer-motion";
 import { CheckCircle2, Loader2 } from "lucide-react";
+
+import { useEnquiry } from "@/components/enquiry/enquiry-provider";
 
 const fieldClasses =
   "w-full rounded-2xl border border-charcoal/15 bg-white px-5 py-3.5 text-sm text-charcoal placeholder:text-charcoal/40 transition-colors focus:border-botanical focus:outline-none focus:ring-2 focus:ring-botanical/20";
@@ -19,6 +21,16 @@ export function ContactForm() {
   const [status, setStatus] = useState<Status>("idle");
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [values, setValues] = useState(emptyValues);
+  const { prefillMessage, setPrefillMessage } = useEnquiry();
+
+  // Seed the message when arriving from the enquiry drawer's "Send via contact
+  // form" action, then consume the prefill so it doesn't reapply on edits.
+  useEffect(() => {
+    if (!prefillMessage) return;
+    setValues((prev) => ({ ...prev, message: prefillMessage }));
+    setStatus("idle");
+    setPrefillMessage(null);
+  }, [prefillMessage, setPrefillMessage]);
   const [emailError, setEmailError] = useState<string | null>(null);
 
   // Every field must be non-empty before submitting is allowed.

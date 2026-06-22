@@ -8,6 +8,7 @@ import { Phone } from "lucide-react";
 import { Logo } from "@/components/layout/logo";
 import { TopInfoBar } from "@/components/layout/top-info-bar";
 import { MobileMenu } from "@/components/layout/mobile-menu";
+import { EnquiryTrigger } from "@/components/layout/enquiry-trigger";
 import { WhatsAppIcon } from "@/components/layout/whatsapp-icon";
 import { Container } from "@/components/ui/container";
 import { navLinks } from "@/lib/site-config";
@@ -61,31 +62,35 @@ export function Navbar({ settings }: { settings: SiteSettings }) {
               ))}
             </nav>
 
-            <div className="hidden items-center gap-3 lg:flex">
-              <a
-                href={`tel:${settings.phone.replace(/\s+/g, "")}`}
-                className={cn(
-                  "inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-medium transition-colors",
-                  scrolled
-                    ? "border-charcoal/15 text-charcoal hover:border-botanical hover:text-botanical"
-                    : "border-white/40 text-white hover:bg-white/10"
-                )}
-              >
-                <Phone className="h-4 w-4" />
-                Call Us
-              </a>
-              <a
-                href={`https://wa.me/${settings.whatsapp.replace(/\D/g, "")}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-full bg-botanical px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-botanical-dark"
-              >
-                <WhatsAppIcon className="h-4 w-4" />
-                WhatsApp
-              </a>
-            </div>
+            <div className="flex items-center gap-2 sm:gap-3">
+              <EnquiryTrigger light={!scrolled} />
 
-            <MobileMenu phone={settings.phone} whatsapp={settings.whatsapp} lightText={!scrolled} />
+              <div className="hidden items-center gap-3 lg:flex">
+                <a
+                  href={`tel:${settings.phone.replace(/\s+/g, "")}`}
+                  className={cn(
+                    "inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-medium transition-colors",
+                    scrolled
+                      ? "border-charcoal/15 text-charcoal hover:border-botanical hover:text-botanical"
+                      : "border-white/40 text-white hover:bg-white/10"
+                  )}
+                >
+                  <Phone className="h-4 w-4" />
+                  Call Us
+                </a>
+                <a
+                  href={`https://wa.me/${settings.whatsapp.replace(/\D/g, "")}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 rounded-full bg-botanical px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-botanical-dark"
+                >
+                  <WhatsAppIcon className="h-4 w-4" />
+                  WhatsApp
+                </a>
+              </div>
+
+              <MobileMenu phone={settings.phone} whatsapp={settings.whatsapp} lightText={!scrolled} />
+            </div>
           </div>
         </Container>
       </div>

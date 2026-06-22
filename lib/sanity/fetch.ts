@@ -2,7 +2,10 @@ import { client } from "./client";
 import { resolveImage } from "./image";
 import {
   categoriesQuery,
+  featuredProductsQuery,
   heroSlidesQuery,
+  productBySlugQuery,
+  productsQuery,
   projectsQuery,
   servicesQuery,
   siteSettingsQuery,
@@ -11,6 +14,7 @@ import {
 import {
   fallbackCategories,
   fallbackHeroSlides,
+  fallbackProducts,
   fallbackProjects,
   fallbackServices,
   fallbackSiteSettings,
@@ -21,6 +25,8 @@ import type {
   CategoryView,
   HeroSlide,
   HeroSlideView,
+  Product,
+  ProductView,
   Project,
   ProjectView,
   Service,
@@ -36,9 +42,21 @@ import type {
  * can fall back to static data instead of crashing the page.
  */
 async function safeFetch<T>(query: string): Promise<T | null> {
+  return safeFetchParams<T>(query, {});
+}
+
+/**
+ * Parameterised variant of {@link safeFetch} for queries that take GROQ params
+ * (e.g. a slug). Same contract: returns `null` when Sanity isn't configured or
+ * the request fails, so callers can fall back to static data.
+ */
+async function safeFetchParams<T>(
+  query: string,
+  params: Record<string, unknown>
+): Promise<T | null> {
   if (!client) return null;
   try {
-    return await client.fetch<T>(query);
+    return await client.fetch<T>(query, params);
   } catch (error) {
     console.error("Sanity fetch failed, falling back to static data:", error);
     return null;
@@ -130,6 +148,51 @@ export async function getTestimonials(): Promise<TestimonialView[]> {
         : fallback.image,
     };
   });
+}
+
+/** Resolve a raw product doc to a view model, falling back per-field on images. */
+function mapProduct(product: Product, index: number): ProductView {
+  const fallback = fallbackProducts[index % fallbackProducts.length];
+  return {
+    _id: product._id,
+    name: product.name,
+    slug: product.slug,
+    category: product.category,
+    images: product.images?.length
+      ? product.images.map((image, i) =>
+          resolveImage(image, fallback.images[i % fallback.images.length])
+        )
+      : fallback.images,
+    shortDescription: product.shortDescription,
+    description: product.description,
+    specifications: product.specifications ?? [],
+    availabilityLabel: product.availabilityLabel,
+    featured: product.featured ?? false,
+  };
+}
+
+export async function getProducts(): Promise<ProductView[]> {
+  const products = await safeFetch<Product[]>(productsQuery);
+  if (!products?.length) return fallbackProducts;
+
+  return products.map((product, index) => mapProduct(product, index));
+}
+
+export async function getFeaturedProducts(): Promise<ProductView[]> {
+  const products = await safeFetch<Product[]>(featuredProductsQuery);
+  if (!products?.length) return fallbackProducts.filter((product) => product.featured);
+
+  return products.map((product, index) => mapProduct(product, index));
+}
+
+export async function getProduct(slug: string): Promise<ProductView | null> {
+  const product = await safeFetchParams<Product | null>(productBySlugQuery, { slug });
+  if (product) return mapProduct(product, 0);
+
+  // Fall back to the matching sample product when Sanity is unconfigured, empty,
+  // or errors — mirroring getProducts() so the catalog and detail pages agree.
+  // Only a slug present in neither source 404s.
+  return fallbackProducts.find((p) => p.slug === slug) ?? null;
 }
 
 export async function getSiteSettings(): Promise<SiteSettings> {

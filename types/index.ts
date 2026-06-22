@@ -85,6 +85,37 @@ export interface ProjectView {
   description: string;
 }
 
+export interface ProductSpec {
+  label: string;
+  value: string;
+}
+
+export interface Product {
+  _id: string;
+  name: string;
+  slug: string;
+  category: { name: string; slug: string };
+  images: SanityImage[];
+  shortDescription: string;
+  description: string;
+  specifications?: ProductSpec[];
+  availabilityLabel?: string;
+  featured?: boolean;
+}
+
+export interface ProductView {
+  _id: string;
+  name: string;
+  slug: string;
+  category: { name: string; slug: string };
+  images: ImageView[];
+  shortDescription: string;
+  description: string;
+  specifications: ProductSpec[];
+  availabilityLabel?: string;
+  featured: boolean;
+}
+
 export interface Testimonial {
   _id: string;
   name: string;

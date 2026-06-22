@@ -1,9 +1,11 @@
 import { defineField, defineType } from "sanity";
+import { orderRankField, orderRankOrdering } from "@sanity/orderable-document-list";
 
 export const heroSlide = defineType({
   name: "heroSlide",
   title: "Hero Slide",
   type: "document",
+  orderings: [orderRankOrdering],
   fields: [
     defineField({
       name: "title",
@@ -46,13 +48,7 @@ export const heroSlide = defineType({
       description: "Internal path (e.g. /#contact) or full URL.",
       validation: (rule) => rule.required(),
     }),
-    defineField({
-      name: "order",
-      title: "Order",
-      type: "number",
-      description: "Slides are sorted by this value, ascending.",
-      initialValue: 0,
-    }),
+    orderRankField({ type: "heroSlide" }),
   ],
   preview: {
     select: { title: "title", media: "image" },

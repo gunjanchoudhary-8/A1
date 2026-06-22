@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 
 import { Container } from "@/components/ui/container";
@@ -21,7 +22,10 @@ export async function FeaturedCollections() {
         <div className="mt-16 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {categories.map((category, i) => (
             <FadeIn key={category._id} delay={(i % 3) * 0.08}>
-              <div className="group relative aspect-[3/4] overflow-hidden rounded-3xl bg-charcoal">
+              <Link
+                href={`/products?category=${category.slug}`}
+                className="group relative block aspect-[3/4] overflow-hidden rounded-3xl bg-charcoal"
+              >
                 <Image
                   src={category.image.src}
                   alt={category.image.alt}
@@ -42,7 +46,7 @@ export async function FeaturedCollections() {
                     <span className="overflow-hidden">{category.description}</span>
                   </p>
                 </div>
-              </div>
+              </Link>
             </FadeIn>
           ))}
         </div>

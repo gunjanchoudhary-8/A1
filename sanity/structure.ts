@@ -1,11 +1,21 @@
 import type { StructureResolver } from "sanity/structure";
+import { orderableDocumentListDeskItem } from "@sanity/orderable-document-list";
 
 /**
  * Customises the Studio's content navigation: pins the singleton
- * "Site Settings" document at the top, then lists the remaining
- * collections as normal document lists.
+ * "Site Settings" document at the top, then lists each collection as a
+ * drag-to-reorder list (via @sanity/orderable-document-list).
  */
-export const structure: StructureResolver = (S) =>
+const orderableTypes: { type: string; title: string }[] = [
+  { type: "heroSlide", title: "Hero Slides" },
+  { type: "service", title: "Services" },
+  { type: "category", title: "Categories" },
+  { type: "product", title: "Products" },
+  { type: "project", title: "Projects" },
+  { type: "testimonial", title: "Testimonials" },
+];
+
+export const structure: StructureResolver = (S, context) =>
   S.list()
     .title("Content")
     .items([
@@ -16,7 +26,12 @@ export const structure: StructureResolver = (S) =>
           S.document().schemaType("siteSettings").documentId("siteSettings")
         ),
       S.divider(),
-      ...S.documentTypeListItems().filter(
-        (item) => item.getId() !== "siteSettings"
+      ...orderableTypes.map((item) =>
+        orderableDocumentListDeskItem({
+          type: item.type,
+          title: item.title,
+          S,
+          context,
+        })
       ),
     ]);

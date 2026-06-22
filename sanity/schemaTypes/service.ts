@@ -1,9 +1,11 @@
 import { defineField, defineType } from "sanity";
+import { orderRankField, orderRankOrdering } from "@sanity/orderable-document-list";
 
 export const service = defineType({
   name: "service",
   title: "Service",
   type: "document",
+  orderings: [orderRankOrdering],
   fields: [
     defineField({
       name: "title",
@@ -32,12 +34,7 @@ export const service = defineType({
       ],
       validation: (rule) => rule.required(),
     }),
-    defineField({
-      name: "order",
-      title: "Order",
-      type: "number",
-      initialValue: 0,
-    }),
+    orderRankField({ type: "service" }),
   ],
   preview: {
     select: { title: "title", media: "image" },
