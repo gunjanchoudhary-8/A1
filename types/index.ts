@@ -112,8 +112,6 @@ export interface SiteSettings {
   phone: string;
   whatsapp: string;
   email: string;
-  address: string;
-  mapEmbedUrl?: string;
   logo?: SanityImage;
   socialLinks: SocialLink[];
 }

@@ -15,7 +15,7 @@ export function WhatsAppButton({ whatsapp }: { whatsapp: string }) {
       transition={{ duration: 0.4, delay: 0.6, ease: "easeOut" }}
       whileHover={{ scale: 1.06 }}
       whileTap={{ scale: 0.96 }}
-      className="fixed right-5 bottom-5 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-botanical text-white shadow-lg shadow-botanical/30 sm:right-8 sm:bottom-8"
+      className="fixed left-5 bottom-5 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-botanical text-white shadow-lg shadow-botanical/30 sm:left-8 sm:bottom-8"
     >
       <WhatsAppIcon className="h-7 w-7" />
     </motion.a>

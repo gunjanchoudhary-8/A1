@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Mail, MapPin, Phone } from "lucide-react";
+import { Mail, Phone } from "lucide-react";
 
 import { Container } from "@/components/ui/container";
 import { Logo } from "@/components/layout/logo";
@@ -65,10 +65,6 @@ export function Footer({ settings }: { settings: SiteSettings }) {
                 <a href={`mailto:${settings.email}`} className="transition-colors hover:text-white">
                   {settings.email}
                 </a>
-              </li>
-              <li className="flex items-start gap-3">
-                <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-botanical" />
-                <span>{settings.address}</span>
               </li>
             </ul>
           </div>

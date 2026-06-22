@@ -30,10 +30,30 @@ import type {
   TestimonialView,
 } from "@/types";
 
-export async function getHeroSlides(): Promise<HeroSlideView[]> {
-  if (!client) return fallbackHeroSlides;
+/**
+ * Run a GROQ query, returning `null` when Sanity isn't configured or the
+ * request fails (network/DNS error, unreachable project, etc.) so callers
+ * can fall back to static data instead of crashing the page.
+ */
+async function safeFetch<T>(query: string): Promise<T | null> {
+  if (!client) return null;
+  try {
+    return await client.fetch<T>(query);
+  } catch (error) {
+    console.error("Sanity fetch failed, falling back to static data:", error);
+    return null;
+  }
+}
 
-  const slides = await client.fetch<HeroSlide[]>(heroSlidesQuery);
+/** Drop null/undefined keys so a partial Sanity doc can't clobber fallbacks. */
+function withoutNullish<T extends object>(obj: T): Partial<T> {
+  return Object.fromEntries(
+    Object.entries(obj).filter(([, value]) => value !== null && value !== undefined)
+  ) as Partial<T>;
+}
+
+export async function getHeroSlides(): Promise<HeroSlideView[]> {
+  const slides = await safeFetch<HeroSlide[]>(heroSlidesQuery);
   if (!slides?.length) return fallbackHeroSlides;
 
   return slides.map((slide, index) => ({
@@ -47,9 +67,7 @@ export async function getHeroSlides(): Promise<HeroSlideView[]> {
 }
 
 export async function getServices(): Promise<ServiceView[]> {
-  if (!client) return fallbackServices;
-
-  const services = await client.fetch<Service[]>(servicesQuery);
+  const services = await safeFetch<Service[]>(servicesQuery);
   if (!services?.length) return fallbackServices;
 
   return services.map((service, index) => ({
@@ -61,9 +79,7 @@ export async function getServices(): Promise<ServiceView[]> {
 }
 
 export async function getCategories(): Promise<CategoryView[]> {
-  if (!client) return fallbackCategories;
-
-  const categories = await client.fetch<Category[]>(categoriesQuery);
+  const categories = await safeFetch<Category[]>(categoriesQuery);
   if (!categories?.length) return fallbackCategories;
 
   return categories.map((category, index) => ({
@@ -76,9 +92,7 @@ export async function getCategories(): Promise<CategoryView[]> {
 }
 
 export async function getProjects(): Promise<ProjectView[]> {
-  if (!client) return fallbackProjects;
-
-  const projects = await client.fetch<Project[]>(projectsQuery);
+  const projects = await safeFetch<Project[]>(projectsQuery);
   if (!projects?.length) return fallbackProjects;
 
   return projects.map((project, index) => {
@@ -100,9 +114,7 @@ export async function getProjects(): Promise<ProjectView[]> {
 }
 
 export async function getTestimonials(): Promise<TestimonialView[]> {
-  if (!client) return fallbackTestimonials;
-
-  const testimonials = await client.fetch<Testimonial[]>(testimonialsQuery);
+  const testimonials = await safeFetch<Testimonial[]>(testimonialsQuery);
   if (!testimonials?.length) return fallbackTestimonials;
 
   return testimonials.map((testimonial, index) => {
@@ -121,13 +133,13 @@ export async function getTestimonials(): Promise<TestimonialView[]> {
 }
 
 export async function getSiteSettings(): Promise<SiteSettings> {
-  if (!client) return fallbackSiteSettings;
-
-  const settings = await client.fetch<SiteSettings | null>(siteSettingsQuery);
+  const settings = await safeFetch<SiteSettings | null>(siteSettingsQuery);
   if (!settings) return fallbackSiteSettings;
 
+  // Strip null/undefined fields so a partial Sanity doc (e.g. null
+  // socialLinks) doesn't overwrite the fallback values and crash consumers.
   return {
     ...fallbackSiteSettings,
-    ...settings,
+    ...withoutNullish(settings),
   };
 }

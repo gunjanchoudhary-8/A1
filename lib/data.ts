@@ -20,7 +20,7 @@ export const fallbackHeroSlides: HeroSlideView[] = [
     subtitle:
       "Premium indoor plants and botanical solutions for homes and workspaces.",
     image: {
-      src: "https://images.unsplash.com/photo-1545165375-1f1c4dfa1d2c?q=80&w=2400&auto=format&fit=crop",
+      src: "https://images.unsplash.com/photo-1484154218962-a197022b5858?q=80&w=2400&auto=format&fit=crop",
       alt: "Bright living room filled with lush indoor plants",
     },
     buttonText: "Explore Indoor Plants",
@@ -107,7 +107,7 @@ export const fallbackServices: ServiceView[] = [
     description:
       "Handcrafted decorative trays and planters that elevate tables, counters and reception areas.",
     image: {
-      src: "https://images.unsplash.com/photo-1416662070879-08d77c5fb6dc?q=80&w=1600&auto=format&fit=crop",
+      src: "https://images.unsplash.com/photo-1466781783364-36c955e42a7f?q=80&w=1600&auto=format&fit=crop",
       alt: "Decorative tray styled with succulents and candles",
     },
   },
@@ -140,7 +140,7 @@ export const fallbackCategories: CategoryView[] = [
     slug: "outdoor-plants",
     description: "Resilient varieties for gardens, terraces and balconies.",
     image: {
-      src: "https://images.unsplash.com/photo-1416809297966-d8d1b6b7f8d7?q=80&w=1600&auto=format&fit=crop",
+      src: "https://images.unsplash.com/photo-1459156212016-c812468e2115?q=80&w=1600&auto=format&fit=crop",
       alt: "Outdoor garden with potted plants",
     },
   },
@@ -200,7 +200,7 @@ export const fallbackProjects: ProjectView[] = [
     },
     galleryImages: [
       {
-        src: "https://images.unsplash.com/photo-1416809297966-d8d1b6b7f8d7?q=80&w=1600&auto=format&fit=crop",
+        src: "https://images.unsplash.com/photo-1459156212016-c812468e2115?q=80&w=1600&auto=format&fit=crop",
         alt: "Garden pathway lined with plants",
       },
       {
@@ -364,9 +364,6 @@ export const fallbackSiteSettings: SiteSettings = {
   phone: "+91 98765 43210",
   whatsapp: "+919876543210",
   email: "hello@a1nursery.com",
-  address: "12 Greenway Avenue, Bengaluru, Karnataka 560001, India",
-  mapEmbedUrl:
-    "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3888.6!2d77.5946!3d12.9716!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTLCsDU4JzE3LjgiTiA3N8KwMzUnNDAuNiJF!5e0!3m2!1sen!2sin!4v1700000000000",
   socialLinks: [
     { platform: "instagram", url: "https://instagram.com" },
     { platform: "facebook", url: "https://facebook.com" },

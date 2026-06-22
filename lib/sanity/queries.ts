@@ -1,7 +1,7 @@
 import { groq } from "next-sanity";
 
 export const heroSlidesQuery = groq`
-  *[_type == "heroSlide"] | order(orderRank asc) {
+  *[_type == "heroSlide"] | order(order asc) {
     _id,
     title,
     subtitle,
@@ -12,7 +12,7 @@ export const heroSlidesQuery = groq`
 `;
 
 export const servicesQuery = groq`
-  *[_type == "service"] | order(orderRank asc) {
+  *[_type == "service"] | order(order asc) {
     _id,
     title,
     description,
@@ -21,7 +21,7 @@ export const servicesQuery = groq`
 `;
 
 export const categoriesQuery = groq`
-  *[_type == "category"] | order(orderRank asc) {
+  *[_type == "category"] | order(order asc) {
     _id,
     name,
     "slug": slug.current,
@@ -31,7 +31,7 @@ export const categoriesQuery = groq`
 `;
 
 export const projectsQuery = groq`
-  *[_type == "project"] | order(orderRank asc) {
+  *[_type == "project"] | order(order asc) {
     _id,
     title,
     "slug": slug.current,
@@ -43,7 +43,7 @@ export const projectsQuery = groq`
 `;
 
 export const testimonialsQuery = groq`
-  *[_type == "testimonial"] | order(orderRank asc) {
+  *[_type == "testimonial"] | order(order asc) {
     _id,
     name,
     designation,
@@ -58,8 +58,6 @@ export const siteSettingsQuery = groq`
     phone,
     whatsapp,
     email,
-    address,
-    mapEmbedUrl,
     logo,
     socialLinks
   }

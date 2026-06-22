@@ -1,4 +1,4 @@
-import { Mail, MapPin, Phone } from "lucide-react";
+import { Mail, Phone } from "lucide-react";
 
 import { Container } from "@/components/ui/container";
 import { SectionHeading } from "@/components/ui/section-heading";
@@ -22,12 +22,6 @@ export async function Contact() {
       label: "Email us",
       value: settings.email,
       href: `mailto:${settings.email}`,
-    },
-    {
-      icon: MapPin,
-      label: "Visit us",
-      value: settings.address,
-      href: undefined,
     },
   ];
 
@@ -99,18 +93,6 @@ export async function Contact() {
                   <span className="mt-1 block text-sm font-medium">Message us on WhatsApp</span>
                 </span>
               </a>
-
-              {settings.mapEmbedUrl ? (
-                <div className="overflow-hidden rounded-2xl border border-charcoal/10">
-                  <iframe
-                    src={settings.mapEmbedUrl}
-                    title="A1 Nursery location"
-                    loading="lazy"
-                    referrerPolicy="no-referrer-when-downgrade"
-                    className="h-64 w-full border-0"
-                  />
-                </div>
-              ) : null}
             </div>
           </FadeIn>
         </div>

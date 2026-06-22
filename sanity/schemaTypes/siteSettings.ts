@@ -32,19 +32,6 @@ export const siteSettings = defineType({
       validation: (rule) => rule.required().email(),
     }),
     defineField({
-      name: "address",
-      title: "Address",
-      type: "text",
-      rows: 2,
-      validation: (rule) => rule.required(),
-    }),
-    defineField({
-      name: "mapEmbedUrl",
-      title: "Google Maps Embed URL",
-      type: "url",
-      description: "The 'src' value from a Google Maps embed iframe.",
-    }),
-    defineField({
       name: "socialLinks",
       title: "Social Links",
       type: "array",
