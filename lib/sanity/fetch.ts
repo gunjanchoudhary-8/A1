@@ -1,5 +1,5 @@
 import { client } from "./client";
-import { resolveImage } from "./image";
+import { resolveImage, urlForImage } from "./image";
 import {
   categoriesQuery,
   featuredProductsQuery,
@@ -32,6 +32,7 @@ import type {
   Service,
   ServiceView,
   SiteSettings,
+  SiteSettingsRaw,
   Testimonial,
   TestimonialView,
 } from "@/types";
@@ -196,13 +197,23 @@ export async function getProduct(slug: string): Promise<ProductView | null> {
 }
 
 export async function getSiteSettings(): Promise<SiteSettings> {
-  const settings = await safeFetch<SiteSettings | null>(siteSettingsQuery);
+  const settings = await safeFetch<SiteSettingsRaw | null>(siteSettingsQuery);
   if (!settings) return fallbackSiteSettings;
+
+  // Resolve image fields separately: the raw query returns Sanity image refs,
+  // but consumers expect `ImageView`s. Pull them out before the merge so the
+  // raw refs can't clobber the resolved fallbacks.
+  const { logo, aboutImage, ...rest } = settings;
+  const logoUrl = urlForImage(logo)?.width(400).url();
 
   // Strip null/undefined fields so a partial Sanity doc (e.g. null
   // socialLinks) doesn't overwrite the fallback values and crash consumers.
   return {
     ...fallbackSiteSettings,
-    ...withoutNullish(settings),
+    ...withoutNullish(rest),
+    logo: logoUrl
+      ? { src: logoUrl, alt: logo?.alt || "A1 Nursery" }
+      : fallbackSiteSettings.logo,
+    aboutImage: resolveImage(aboutImage, fallbackSiteSettings.aboutImage),
   };
 }

@@ -45,7 +45,7 @@ export function Navbar({ settings }: { settings: SiteSettings }) {
       >
         <Container>
           <div className="flex h-20 items-center justify-between">
-            <Logo light={!scrolled} />
+            <Logo light={!scrolled} logo={settings.logo} />
 
             <nav className="hidden items-center gap-8 lg:flex">
               {navLinks.map((link) => (
@@ -89,7 +89,12 @@ export function Navbar({ settings }: { settings: SiteSettings }) {
                 </a>
               </div>
 
-              <MobileMenu phone={settings.phone} whatsapp={settings.whatsapp} lightText={!scrolled} />
+              <MobileMenu
+                phone={settings.phone}
+                whatsapp={settings.whatsapp}
+                logo={settings.logo}
+                lightText={!scrolled}
+              />
             </div>
           </div>
         </Container>

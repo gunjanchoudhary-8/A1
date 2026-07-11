@@ -90,6 +90,7 @@ export const siteSettingsQuery = groq`
     whatsapp,
     email,
     logo,
+    aboutImage,
     socialLinks
   }
 `;

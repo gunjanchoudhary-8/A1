@@ -9,7 +9,31 @@ export const siteSettings = defineType({
       name: "logo",
       title: "Logo",
       type: "image",
+      description:
+        "Shown in the navbar, footer and mobile menu. Use a transparent PNG or SVG. Falls back to the leaf mark when empty.",
       options: { hotspot: true },
+      fields: [
+        defineField({
+          name: "alt",
+          title: "Alternative text",
+          type: "string",
+        }),
+      ],
+    }),
+    defineField({
+      name: "aboutImage",
+      title: "About Section Image",
+      type: "image",
+      description: "Shown beside the About text on the homepage. Portrait works best (4:5).",
+      options: { hotspot: true },
+      fields: [
+        defineField({
+          name: "alt",
+          title: "Alternative text",
+          type: "string",
+          description: "Important for SEO and accessibility.",
+        }),
+      ],
     }),
     defineField({
       name: "phone",

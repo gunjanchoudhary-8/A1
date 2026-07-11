@@ -139,10 +139,22 @@ export interface SocialLink {
   url: string;
 }
 
+/** Resolved site settings, ready for components (images are `ImageView`s). */
 export interface SiteSettings {
   phone: string;
   whatsapp: string;
   email: string;
+  logo?: ImageView;
+  aboutImage: ImageView;
+  socialLinks: SocialLink[];
+}
+
+/** Raw site settings as returned by the GROQ query (images unresolved). */
+export interface SiteSettingsRaw {
+  phone: string;
+  whatsapp: string;
+  email: string;
   logo?: SanityImage;
+  aboutImage?: SanityImage;
   socialLinks: SocialLink[];
 }

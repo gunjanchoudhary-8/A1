@@ -572,6 +572,10 @@ export const fallbackSiteSettings: SiteSettings = {
   phone: "+91 98765 43210",
   whatsapp: "+919876543210",
   email: "hello@a1nursery.com",
+  aboutImage: {
+    src: "https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?q=80&w=1600&auto=format&fit=crop",
+    alt: "Inside the A1 Nursery greenhouse, rows of healthy plants ready for delivery",
+  },
   socialLinks: [
     { platform: "instagram", url: "https://instagram.com" },
     { platform: "facebook", url: "https://facebook.com" },

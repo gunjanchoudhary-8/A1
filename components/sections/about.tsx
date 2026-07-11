@@ -4,16 +4,19 @@ import { Container } from "@/components/ui/container";
 import { FadeIn } from "@/components/ui/fade-in";
 import { AnimatedCounter } from "@/components/ui/animated-counter";
 import { stats } from "@/lib/data";
+import { getSiteSettings } from "@/lib/sanity/fetch";
 
-export function About() {
+export async function About() {
+  const { aboutImage } = await getSiteSettings();
+
   return (
     <section id="about" className="py-24 sm:py-32">
       <Container>
         <div className="grid items-center gap-16 lg:grid-cols-2 lg:gap-20">
           <FadeIn className="relative aspect-[4/5] w-full overflow-hidden rounded-3xl bg-cream">
             <Image
-              src="https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?q=80&w=1600&auto=format&fit=crop"
-              alt="Inside the A1 Nursery greenhouse, rows of healthy plants ready for delivery"
+              src={aboutImage.src}
+              alt={aboutImage.alt}
               fill
               sizes="(min-width: 1024px) 50vw, 100vw"
               className="object-cover"

@@ -9,14 +9,16 @@ import { Logo } from "@/components/layout/logo";
 import { navLinks } from "@/lib/site-config";
 import { cn } from "@/lib/utils";
 import { WhatsAppIcon } from "@/components/layout/whatsapp-icon";
+import type { ImageView } from "@/types";
 
 interface MobileMenuProps {
   phone: string;
   whatsapp: string;
+  logo?: ImageView;
   lightText: boolean;
 }
 
-export function MobileMenu({ phone, whatsapp, lightText }: MobileMenuProps) {
+export function MobileMenu({ phone, whatsapp, logo, lightText }: MobileMenuProps) {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
@@ -51,7 +53,7 @@ export function MobileMenu({ phone, whatsapp, lightText }: MobileMenuProps) {
             className="fixed inset-0 z-40 flex flex-col bg-white"
           >
             <div className="flex h-16 items-center justify-between px-6">
-              <Logo />
+              <Logo logo={logo} />
             </div>
 
             <nav className="flex flex-1 flex-col items-start justify-center gap-2 px-8">
